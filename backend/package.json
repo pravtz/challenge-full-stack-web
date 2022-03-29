@@ -1,0 +1,46 @@
+{
+  "name": "api-edtech",
+  "version": "1.0.0",
+  "description": "this is api for student enrollment",
+  "main": "index.js",
+  "engines": {
+    "node": "17"
+  },
+  "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "test": " NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest ",
+    "test:coverage": " NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --coverage",
+    "test:wath": "NODE_OPTIONS='--experimental-vm-modules' jest --no-cache --watchAll"
+  },
+  "author": "@pravtz",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.11.1",
+    "celebrate": "^15.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-async-errors": "^3.1.1",
+    "pino": "^7.9.2",
+    "pino-pretty": "^7.6.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.23",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.1",
+    "prisma": "^3.11.1",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.14.1",
+    "typescript": "^4.6.3"
+  }
+}
