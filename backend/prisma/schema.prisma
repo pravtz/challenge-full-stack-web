@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Student {
-  ra    Int @id @default(autoincrement())
+  ra    Int    @id @default(autoincrement())
   name  String @db.VarChar(255)
   email String @unique @db.VarChar(255)
   cpf   String @unique @db.Char(14)

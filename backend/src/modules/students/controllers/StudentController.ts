@@ -53,7 +53,7 @@ export default class StudentController {
       const ra = Number(raKey);
       const { name, email, cpf }: studentType = request.body;
       const save = await students.execute({ ra, name, email, cpf });
-      console.log(save);
+      
       return response.status(201).json({ ra: save.ra });
     } catch (error) {
       throw new AppErrors(`Error update student ${error}`, 500);
@@ -65,7 +65,6 @@ export default class StudentController {
       const { raKey } = request.params;
       const ra = Number(raKey);
       const studentShow = await student.execute(ra);
-      console.log(studentShow);
       return response.status(201).json(studentShow);
     } catch (error) {
       throw new AppErrors(`Error delete student ${error}`);

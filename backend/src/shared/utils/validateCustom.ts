@@ -1,7 +1,7 @@
 export const validedDocumentCPF = (value: string, helpers: any ) => {
   const unchangedValue = value
   value = value.replace(/[^\d]+/g, "");
-  console.log(`${value}, ${unchangedValue}`)
+
   if (value == "") return helpers.error('invalid CPF');
 
   if (
