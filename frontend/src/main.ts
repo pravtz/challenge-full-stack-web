@@ -1,9 +1,14 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
+import VueCompositionAPI, { createApp, h } from '@vue/composition-api'
+
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+Vue.use(VueCompositionAPI)
 
-app.use(router)
+const app = createApp({
+  router,
+  render: () => h(App)
+})
 
 app.mount('#app')
