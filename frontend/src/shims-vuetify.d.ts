@@ -1,7 +1,4 @@
-declare module "vuetify";
-declare module "vuetify/lib/components";
-declare module "vuetify/lib/directives";
-declare module "*.vue" {
-  import Vue from "vue";
-  export default Vue;
+declare module "vuetify/lib/framework" {
+  import Vuetify from "vuetify";
+  export default Vuetify;
 }
