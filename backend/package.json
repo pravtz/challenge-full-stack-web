@@ -8,19 +8,19 @@
   },
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
-
     "test:e2e": "dotenv -e .env.test jest -i",
+    "migrate:mysql": "dotenv -e .env.development -- npx prisma migrate dev --name mysql-init",
     "migrate:mysql:test": "dotenv -e .env.test -- npx prisma migrate dev --name mysql-init",
-
     "test": " NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest ",
-    "test:coverage": " NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --coverage",
-    "test:wath": "NODE_OPTIONS='--experimental-vm-modules' jest --no-cache --watchAll"
+    "test:wath": "NODE_OPTIONS='--experimental-vm-modules' jest --no-cache --watchAll",
+    "start:docker": "docker up -d && npm migrate:mysql && npm run dev"
   },
   "author": "@pravtz",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.11.1",
     "celebrate": "^15.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "dotenv-cli": "^5.1.0",
     "express": "^4.17.3",
@@ -29,6 +29,7 @@
     "pino-pretty": "^7.6.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",

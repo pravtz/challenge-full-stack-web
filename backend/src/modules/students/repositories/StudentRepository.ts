@@ -1,6 +1,6 @@
 import { prisma } from "@shared/database/client";
 import type { studentType, studentUpdateType, studentFullType } from "./IStudent";
-import { IStudentRepository } from "./IStudent";
+import { IStudentRepository, studentSelectCustom} from "./IStudent";
 
 class StudentRepository implements IStudentRepository {
   async findAll() {
@@ -33,6 +33,27 @@ class StudentRepository implements IStudentRepository {
       })
       return !!student
   }
+  async search({ra, name, email, cpf}: studentSelectCustom){
+   const students = await prisma.$queryRawUnsafe(
+        'SELECT * FROM student WHERE ra = ? OR name LIKE ? OR email LIKE ? OR cpf = ?',
+        ra,
+        `%${name}%`,
+        `%${email}%`,
+        cpf
+      )
+      console.log(`ra ${ra}, name ${name}, email ${email}, cpf ${cpf}`)
+      console.log(students)
+      return students
+    
+  }
+  async searchAll(key: string, value: string){
+    const students = await prisma.$queryRawUnsafe(
+         `SELECT * FROM student WHERE ${key} LIKE "%${value}%"`
+         )
+
+       return students
+   }
+
 
   async find(ra: number) {
     const studant = await prisma.student.findFirst({

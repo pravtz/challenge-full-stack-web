@@ -16,6 +16,12 @@ export type studentUpdateType = {
     email?:string
     cpf?: string
 }
+export type studentSelectCustom = {
+    ra?: number
+    name?: string
+    email?:string
+    cpf?: string
+}
 
 export interface IStudentRepository {
     findAll(): Promise<studentFullType[]>

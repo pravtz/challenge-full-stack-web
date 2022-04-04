@@ -16,5 +16,6 @@ StudentRoutes.post('/',CreateStudentValidate,studentController.store)
 StudentRoutes.get('/:raKey',ShowStudentValidate,studentController.show)
 StudentRoutes.put('/:raKey',UpdateStudentValidate,studentController.update)
 StudentRoutes.delete('/:raKey',DeleteStudentValidate,studentController.delete)
+StudentRoutes.post('/search',studentController.selectCustomAll)
 
 export default StudentRoutes

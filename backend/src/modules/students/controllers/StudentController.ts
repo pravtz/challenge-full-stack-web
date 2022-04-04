@@ -2,11 +2,14 @@ import { Request, Response } from "express";
 import CreateStudentService from "../services/CreateStudentService";
 import listStudentService from "../services/ListStudentService";
 import UpgradeStudentService from "../services/UpgradeStudentService";
+import SelectCustomService from "../services/SelectCustomService";
+import SelectAllCustomService from "../services/SelectAllCustonService";
 import AppErrors from "@shared/errors/App.error";
 import type {
   studentFullType,
   studentType,
   studentUpdateType,
+  studentSelectCustom
 } from "./../repositories/IStudent";
 import ShowStudentService from "../services/ShowStudentService";
 import DeleteStudentService from "../services/DeleteStudentService";
@@ -29,6 +32,28 @@ export default class StudentController {
 
       const save = await students.execute(data);
       return response.status(201).json({ ra: save.ra });
+    } catch (error) {
+      throw new AppErrors(`Error create student ${error}`);
+    }
+  }
+  public async selectCustom(request: Request, response: Response){
+    const student = new SelectCustomService()
+    try {
+      const {ra, name, email, cpf}:studentSelectCustom = request.body;
+      const students = await student.execute({ ra, name, email, cpf })
+      console.log(` controller = ra ${ra}, name ${name}, email ${email}, cpf ${cpf}`)
+      return response.status(200).json(students);
+    } catch (error) {
+      throw new AppErrors(`Error create student ${error}`);
+    }
+  }
+  public async selectCustomAll(request: Request, response: Response){
+    const student = new SelectAllCustomService()
+    try {
+      const {key, value} = request.body;
+      const students = await student.execute(key, value)
+     
+      return response.status(200).json(students);
     } catch (error) {
       throw new AppErrors(`Error create student ${error}`);
     }

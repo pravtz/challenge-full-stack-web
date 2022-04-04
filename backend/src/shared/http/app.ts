@@ -5,8 +5,12 @@ import 'express-async-errors';
 import { errors } from 'celebrate'
 import AppErrors from '../errors/App.error'
 import routes from './routes'
+import cors from 'cors'
 
 const app = express();
+
+app.use(cors())
+
 app.use(express.json())
 
 app.use(routes)
