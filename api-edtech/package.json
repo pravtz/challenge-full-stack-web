@@ -13,7 +13,8 @@
     "migrate:mysql:test": "dotenv -e .env.test -- npx prisma migrate dev --name mysql-init",
     "test": " NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest ",
     "test:wath": "NODE_OPTIONS='--experimental-vm-modules' jest --no-cache --watchAll",
-    "start:docker": "docker up -d && npm migrate:mysql && npm run dev"
+    "start:docker:stand-alone": "docker up -d && npm migrate:mysql && npm run dev",
+    "start":"npm run migrate:mysql && npm run dev"
   },
   "author": "@pravtz",
   "license": "ISC",
