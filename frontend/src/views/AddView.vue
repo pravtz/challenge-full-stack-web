@@ -4,7 +4,11 @@
       <v-col sm="7">
         <v-text-field v-model="studentObj.name" label="Name"></v-text-field>
         <v-text-field v-model="studentObj.email" label="E-mail"></v-text-field>
-        <v-text-field v-model="studentObj.cpf" label="cpf"></v-text-field>
+        <v-text-field
+          v-model="studentObj.cpf"
+          v-mask="'###.###.###-##'"
+          label="cpf"
+        ></v-text-field>
         <v-btn class="mr-4" @click="submit"> Enviar </v-btn>
         <v-btn @click="clear"> Limpar </v-btn>
       </v-col>
@@ -14,9 +18,11 @@
 
 <script>
 import Vue from "vue";
+import { mask } from "vue-the-mask";
 import StudentService from "../services/StudentService";
 
 export default Vue.extend({
+  directives: { mask },
   data: () => {
     return {
       studentObj: {

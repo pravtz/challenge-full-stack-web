@@ -19,7 +19,8 @@
       "webpack-env",
       "vuetify",
       "jest",
-      "vue-sweetalert2"
+      "vue-sweetalert2",
+      "vue-the-mask"
     ],
     "paths": {
       "@/*": [
