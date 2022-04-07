@@ -60,4 +60,15 @@ export default {
       return new Error(`Error: ${error}`);
     }
   },
+  async existEmailAndCpf(email: string, cpf: string) {
+    try {
+      const response = await api().post("/student/enrollment/exist", {
+        email,
+        cpf,
+      });
+      return response.data;
+    } catch (error) {
+      return new Error(`Error: ${error}`);
+    }
+  },
 };

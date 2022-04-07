@@ -25,6 +25,14 @@ class StudentRepository implements IStudentRepository {
     });
     return !!student;
   }
+  async existEmail(email: string) {
+    const student = await prisma.student.findUnique({
+      where: {
+        email,
+      },
+    });
+    return !!student;
+  }
   async existFromRa(ra: studentFullType['ra'] ){
       const student = await prisma.student.findUnique({
           where: {

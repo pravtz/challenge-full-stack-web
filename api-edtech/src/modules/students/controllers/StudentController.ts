@@ -4,6 +4,7 @@ import listStudentService from "../services/ListStudentService";
 import UpgradeStudentService from "../services/UpgradeStudentService";
 import SelectCustomService from "../services/SelectCustomService";
 import SelectAllCustomService from "../services/SelectAllCustonService";
+import ValidateEmailAndCpfService from "../services/ValidateEmailAndCpfService";
 import AppErrors from "@shared/errors/App.error";
 import type {
   studentFullType,
@@ -94,5 +95,11 @@ export default class StudentController {
     } catch (error) {
       throw new AppErrors(`Error delete student ${error}`);
     }
+  }
+  public async existEmailAndCpf(request: Request, response: Response){
+    const studentExist = new ValidateEmailAndCpfService()
+    const {email, cpf} = request.body;
+    const valid = await studentExist.execute(email,cpf);
+    return response.status(201).json(valid)
   }
 }

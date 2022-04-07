@@ -69,10 +69,50 @@ export default Vue.extend({
       this.studentObj = { ...response };
     },
     async add() {
-      this.isSubmitted = true;
+      const resValidate = this.$refs.form.validate();
+
+      this.isSubmitted = false;
       console.log(this.studentObj);
       //this.$v.$touch();
+      if (!resValidate) {
+        this.$swal({
+          title: "Preencha corretamente os campos!",
+          icon: "error",
+          showConfirmButton: true,
+          allowOutsideClick: false,
+          allowEnterKey: true,
+          allowEscapeKey: false,
+        });
+        return;
+      }
+      const validEmailAndCpf = await StudentService.existEmailAndCpf(
+        this.studentObj.email,
+        this.studentObj.cpf
+      );
+      if (validEmailAndCpf.isCpf) {
+        this.$swal({
+          title: "Este CPF já possue cadastrado em nosso sistema!",
+          icon: "error",
+          showConfirmButton: true,
+          allowOutsideClick: false,
+          allowEnterKey: true,
+          allowEscapeKey: false,
+        });
+        return;
+      }
+      if (validEmailAndCpf.isEmail) {
+        this.$swal({
+          title: "Este email já existe cadastrado em nosso sistema!",
+          icon: "error",
+          showConfirmButton: true,
+          allowOutsideClick: false,
+          allowEnterKey: true,
+          allowEscapeKey: false,
+        });
+        return;
+      }
       const res = await StudentService.createStudent(this.studentObj);
+
       if (res.ra) {
         this.$swal({
           title: "Aluno Cadastrado com sucesso!",
