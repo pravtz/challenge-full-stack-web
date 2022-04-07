@@ -19,13 +19,11 @@
     "vue-router": "^3.5.1",
     "vue-sweetalert2": "^5.0.2",
     "vue-the-mask": "^0.11.1",
-    "vuelidate": "^0.7.7",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/vue-the-mask": "^0.11.1",
-    "@types/vuelidate": "^0.7.15",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",

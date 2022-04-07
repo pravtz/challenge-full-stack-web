@@ -1,18 +1,30 @@
 <template>
   <v-container>
-    <form>
+    <v-form ref="form" v-model="valid" lazy-validation>
       <v-col sm="7">
-        <v-text-field v-model="studentObj.name" label="Name"></v-text-field>
-        <v-text-field v-model="studentObj.email" label="E-mail"></v-text-field>
+        <v-text-field
+          v-model="studentObj.name"
+          label="Name"
+          :rules="nameRules"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="studentObj.email"
+          label="E-mail"
+          :rules="emailRules"
+          required
+        ></v-text-field>
         <v-text-field
           v-model="studentObj.cpf"
           v-mask="'###.###.###-##'"
+          :rules="cpfRules"
           label="cpf"
+          required
         ></v-text-field>
-        <v-btn class="mr-4" @click="submit"> Enviar </v-btn>
+        <v-btn class="mr-4" @click="submit" :disabled="!valid"> Enviar </v-btn>
         <v-btn @click="clear"> Limpar </v-btn>
       </v-col>
-    </form>
+    </v-form>
   </v-container>
 </template>
 
@@ -20,11 +32,28 @@
 import Vue from "vue";
 import { mask } from "vue-the-mask";
 import StudentService from "../services/StudentService";
+import { validedDocumentCpf } from "@/utils/validedDocumentCpf";
 
 export default Vue.extend({
   directives: { mask },
   data: () => {
     return {
+      valid: true,
+      nameRules: [
+        (v) => !!v || "O nome é obrigatório!",
+        // (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      ],
+      emailRules: [
+        (v) => !!v || "O e-mail é obrigatório!",
+        (v) => /.+@.+\..+/.test(v) || "O e-mail precisa ser valido!",
+      ],
+      cpfRules: [
+        (v) => !!v || "O CPF é obrigatório!",
+        (v) =>
+          /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/.test(v) ||
+          "O CPF precisa conter todos os digitos!",
+        (v) => validedDocumentCpf(v) || "O CPF precisa ser valido!",
+      ],
       studentObj: {
         name: "",
         email: "",
